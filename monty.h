@@ -1,9 +1,12 @@
 #ifndef MONTY_H
 #define MONTY_H
 
-#define _POSIX_C_SOURCE 200809L
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
+#include <stddef.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -16,11 +19,10 @@
  */
 typedef struct stack_s
 {
-	int n;
-	struct stack_s *prev;
-	struct stack_s *next;
+        int n;
+        struct stack_s *prev;
+        struct stack_s *next;
 } stack_t;
-
 
 /**
  * struct instruction_s - opcode and its function
@@ -32,10 +34,77 @@ typedef struct stack_s
  */
 typedef struct instruction_s
 {
-	char *opcode;
-	void (*f)(stack_t **stack, unsigned int line_number);
+        char *opcode;
+        void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-void check_args(int ac);
+/**
+ * struct arg_s - hold variables
+ * @stream: File that connects to the stream from file
+ * @line: string which will be the line of text read from stream
+ * @line_number: for tracking current line number
+ * @tokens: used to store tokens from line
+ * @instruction: a valid instruction from a line
+ * @n_tokens; number of tokens created from line
+ * @head: head/top of the stack (doubly linked lists of struct stack_s)
+ * @stack_length: tracks the number of nodes in the stack
+ * @stack: used to determine whether to use stack/queue data structure
+ *
+ * Description: hold variables that will be used
+ * in different functions of the project as well as variables
+ * that will require memory allocation and freeing
+ */
+typedef struct arg_s
+{
+        FILE *stream;
+        char *line;
+	unsigned int line_number;
+	char **tokens;
+	int n_tokens;
+	instruction_t *instruction;
+	stack_t *head;
+	int stack_length;
+	int stack;
+} arg_t;
+
+extern arg_t *arguments;
+
+void push(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
+void pint(stack_t **stack, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_number);
+void swap(stack_t **stack, unsigned int line_number);
+void add(stack_t **stack, unsigned int line_number);
+void nop(stack_t **stack, unsigned int line_number);
+void sub(stack_t **stack, unsigned int line_number);
+void _div(stack_t **stack, unsigned int line_number);
+void mul(stack_t **stack, unsigned int line_number);
+void mod(stack_t **stack, unsigned int line_number);
+void pchar(stack_t **stack, unsigned int line_number);
+void pstr(stack_t **stack, unsigned int line_number);
+void rotl(stack_t **stack, unsigned int line_number);
+void rotr(stack_t **stack, unsigned int line_number);
+void stack(stack_t **stack, unsigned int line_number);
+void queue(stack_t **stack, unsigned int line_number);
+
+int dprintf(int fd, const char *format, ...);
+ssize_t getline(char **lineptr, size_t *n, FILE *stream);
+FILE *fdopen(int fd, const char *mode);
+
+void malloc_err(void);
+void check_args(int argc);
+void get_stm(char *fn);
+void close_file(void);
+void dump_args();
+void init_args();
+int is_number(char *str);
+void dump_all(void);
+void remove_node(void);
+void token_line(void);
+void dump_tokens(void);
+void exec_inst(void);
+void set_inst(void);
+void dump_stack(stack_t *head);
+void dump_head(void);
 
 #endif /* MONTY_H */
