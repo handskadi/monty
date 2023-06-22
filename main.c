@@ -21,15 +21,15 @@ int main(int ac, char **av)
 
 	while (getline(&arguments->line, &n, arguments->stream) != -1)
 	{
-		arguments->line_number += 1; /* tracking the line number of file */
-		token_line(); /* break line into words */
-		set_inst(); /* get the opcode from tokens array */
-		exec_inst(); /* run the function associated with opcode */
-		dump_tokens(); /* free up memory for the tokens */
+		arguments->line_number += 1; 
+		token_line(); 
+		set_inst(); 
+		exec_inst(); 
+		dump_tokens();
 	}
 
-	close_file(); /* close stream */
-	dump_args(); /* free up memory allocated for the arguments pointer */
+	close_file(); 
+	dump_args();
 
 	return (0);
 }
