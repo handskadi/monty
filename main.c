@@ -12,11 +12,7 @@ int main(int ac, char **av)
 	(void)av;
 
 	/* check if the number os commands line args. */
-	if (ac != 2)
-	{
-		dprintf(2, "USAGE: monty file \n");
-		exit(EXIT_FAILURE);
-	}
+	check_args(ac);
 
 	return (0);
 }
