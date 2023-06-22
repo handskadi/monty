@@ -29,11 +29,11 @@ To use the code in this repository, follow these steps:
 
 1. Clone the repository:
 ```bash
-git clone <repository_url>
+git clone https://github.com/handskadi/monty.git
 ```
 2. Navigate to the project directory:
 ```bash
-cd <project_directory>
+cd monty
 ```
 
 3. Compile the code:
