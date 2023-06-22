@@ -152,9 +152,9 @@ void rotr(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * queue - sets the format of the data to a queue (FIFO)
- * @stack: Pointer to the stack.
- * @line_number: Line number where the mul function is called.
+ * queue - sets the format of  data to a queue
+ * @stack: ptr to stck
+ * @line_number: Ln nmbr where multipy is called
  */
 
 void queue(stack_t **stack, unsigned int line_number)

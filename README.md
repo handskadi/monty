@@ -38,7 +38,7 @@ cd <project_directory>
 
 3. Compile the code:
 ```bash
-gcc -Wall -Werror -Wextra -pedantic *.c -o monty
+gcc -Wall -Werror -Wextra -pedantic -std=c89 *.c -o monty
 ```
 4. Run the interpreter with a Monty byte code file:
 ```bash
